@@ -2,21 +2,21 @@
  * Main service
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 
 // Dependencies
 import { STORAGE_KEY } from '../app.constants';
 import { Injectable } from '@angular/core';
-import { Http, Response, } from '@angular/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { STORAGE_STATE_KEY } from '../app.constants';
 import { AlertService, CacheService } from '../shared';
 import * as moment from 'moment';
 
 // Main
-import { Currency, CacheRates } from './main.model';
+import { CurrencyValue, Currency, CacheRates, APIResponse } from './main.model';
 import { State } from '../currency-box';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class MainService {
      * @constructor
      */
     constructor(
-        private http: Http,
+        private http: HttpClient,
         private alertService: AlertService,
         private cacheService: CacheService
     ) {
@@ -36,10 +36,11 @@ export class MainService {
     }
 
     /**
+     * Get daily rates for calculation
      *
      * @returns {Observable<any>}
      */
-    getDailyRates() {
+    getDailyRates(): Observable<any> {
 
         // Class instance
         const ci = this;
@@ -51,10 +52,10 @@ export class MainService {
                 observer.complete();
             });
         } else {
-            return ci.http.get('/exchange-rates/').map(
-                (res: Response) => ci._processResponse(res.json()),
-                (res: Response) => ci.alertService.add({
-                    message: res.json().message
+            return ci.http.get(`/${API_V}/exchange-rates/`).map(
+                (res: Observable<HttpResponse<string>>) => ci._processResponse(res),
+                (res: HttpErrorResponse) => ci.alertService.add({
+                    message: res.message
                 })
             );
         }
@@ -63,7 +64,10 @@ export class MainService {
     /**
      * Set current boxes state in browser storage
      *
-     * @private
+     * @param {State} leftBox
+     * @param {State} rightBox
+     * @param {string} date
+     * @param {number} timestamp
      */
     saveState(leftBox: State, rightBox: State, date: string, timestamp: number): void {
         this.cacheService.set(STORAGE_STATE_KEY, {
@@ -75,7 +79,10 @@ export class MainService {
     }
 
     /**
+     * Process successful response
      *
+     * @param res
+     * @returns {CacheRates}
      * @private
      */
     private _processResponse(res: any): CacheRates {
@@ -96,11 +103,12 @@ export class MainService {
 
 
     /**
+     * Filter response to retrieve only required currencies
      *
-     * @param res
+     * @param {APIResponse} res
      * @returns {any}
      */
-    private _filterResponse(res: any): Currency {
+    private _filterResponse(res: APIResponse): Currency {
         let exchangeRates: Currency = new Currency();
 
         // Check do we have proper data
@@ -125,15 +133,15 @@ export class MainService {
     }
 
     /**
+     * Format currency value
      *
-     * @param rates
-     * @returns {any}
+     * @param {CurrencyValue} rates
+     * @returns {CurrencyValue}
      * @private
      */
-    private _formatValues(rates) {
+    private _formatValues(rates: CurrencyValue): CurrencyValue {
         Object.keys(rates).forEach(key => rates[key] =
             parseFloat(parseFloat(rates[key]).toFixed(2)));
         return rates;
     }
-
 }

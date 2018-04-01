@@ -15,7 +15,7 @@ Before you can build this project, you must install and configure the following 
 After installing Node, you should be able to run the following command to install development tools.
 You will only need to run this command when dependencies change in [package.json](package.json). This command will also run post install script that will build project for development environment:
 
-    npm install
+    yarn
 
 Also the [Webpack][] is used as main build system.
 
@@ -25,15 +25,20 @@ The last step is to run development web server from Webpack via command below th
 
 In order to build project there are two commands available in [package.json](package.json). First below will build entire project with development profile and place all bundles in 'dist' folder:
 
-    npm run build
+    yarn build
 
 Second command will build project for production environment and minify / unify bundles as much as possible.
 
-    npm run build:prod
+    yarn build:prod
+    
+To start a development server, please use:
+
+    yarn start
+
 
 ## Application workflow
 
-Since the application is based on Angular 4 2 components, entire workflow is done by them.
+Since the application is based on Angular 5 components, entire workflow is done by them.
 
 First there is a main component that is bootstrapped during main Angular module initialization and that is retrieving data necessary for converter to work.
 
@@ -51,10 +56,10 @@ For purpose of this project I have opt out for Angular 4 based application and s
 
 Short list of some resources are below (visible in [package.json](package.json)):
 
-	- Webpack 3
-	- Angular 4
-	- TypeScript 2.5
-	- Moment 2
+	- Webpack 4
+	- Angular 5
+	- TypeScript 2.8
+	- Moment 2.2
 	- ESLint 4
 	- Style lint
 	- TS lint

@@ -2,7 +2,7 @@
  * Main component style
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 
@@ -10,7 +10,7 @@
 @import "../../style/helpers/include";
 
 // Component wrapper
-app-main form {
+form {
     app-currency-box,
     button {
         display: inline-block;

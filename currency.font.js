@@ -6,5 +6,5 @@ module.exports = {
     'classPrefix': 'currency-',
     'baseSelector': '.currency',
     'types': ['eot', 'woff', 'woff2', 'ttf', 'svg'],
-    'fileName': 'app.[fontname].[hash].[ext]'
+    'fileName': '[fontname].[hash].[ext]'
 };

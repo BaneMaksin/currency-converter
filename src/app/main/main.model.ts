@@ -2,7 +2,7 @@
  * Main data model
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 
@@ -10,7 +10,7 @@
 import { State } from '../currency-box';
 
 // Values constant
-class CurrencyValue {
+export class CurrencyValue {
     constructor(
         public kup: number,
         public sre: number,
@@ -50,4 +50,13 @@ export class CacheState {
         public date?: string,
         public timestamp?: number
     ) {}
+}
+
+/**
+ * API response structure
+ */
+export interface APIResponse {
+    code: number;
+    result: any;
+    status: string;
 }

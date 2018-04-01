@@ -4,7 +4,7 @@
     <app-alert></app-alert>
 
     <!-- Exchange converter -->
-    <form *ngIf="exchangeRates.rates" name="exchangeForm" novalidate>
+    <form *ngIf="exchangeRates && exchangeRates.rates" name="exchangeForm" novalidate>
         <app-currency-box [currencies]="exchangeRates.rates" [init]="leftBox" (state)="updateState($event)"
                            *ngIf="leftBox.currency"></app-currency-box>
 

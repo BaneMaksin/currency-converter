@@ -2,7 +2,7 @@
  * Currency box component
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 
@@ -36,7 +36,7 @@ export class CurrencyBoxComponent {
     @Input() currencies: CacheRates;
     @Input() init: State;
 
-    // Outputs
+    // Output
     @Output() state: EventEmitter<State> = new EventEmitter<State>();
 
     /**

@@ -2,7 +2,7 @@
  * Currency box pipe for creating array from object properties
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 import { Pipe, PipeTransform } from '@angular/core';

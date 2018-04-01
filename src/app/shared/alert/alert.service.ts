@@ -2,7 +2,7 @@
  * Alert service
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 
@@ -13,7 +13,7 @@ import { EventEmitter } from '@angular/core';
 import { Alert } from './alert.model';
 
 /**
- *
+ * Alert service instance
  */
 export class AlertService {
 

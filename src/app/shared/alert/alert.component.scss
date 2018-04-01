@@ -2,7 +2,7 @@
  * Alert component style
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 
@@ -10,7 +10,7 @@
 @import "../../../style/helpers/include";
 
 // Wrapper
-.alert-box {
+section {
     border: 1px solid #52afc6;
     position: relative;
     padding: 10px;
@@ -29,7 +29,7 @@
         top: 3px;
         right: 3px;
         background: transparent;
-        border: 1px solid$white;
+        border: 1px solid $white;
         color: $white;
         border-radius: 50%;
         cursor: pointer;

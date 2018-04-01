@@ -2,12 +2,14 @@
  * Main component
  * Author: Branislav Maksin, bane@maksin.net
  * Date: 1.9.2017
- * Copyright: UNLICENSED (c) 2017 Branislav Maksin
+ * Copyright: MIT (c) 2017 Branislav Maksin
  * Version: 1.0.0
  */
 
 // Dependencies
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import {Subscription} from 'rxjs/Subscription';
 import { AlertService, CacheService } from '../shared';
 import { STORAGE_STATE_KEY } from '../app.constants';
 import * as moment from 'moment';
@@ -54,7 +56,7 @@ export class MainComponent implements OnInit {
     /**
      * Initialization lifecycle hook
      */
-    ngOnInit() {
+    ngOnInit(): void {
 
         // Get the data
         this.loadAll();
@@ -65,13 +67,13 @@ export class MainComponent implements OnInit {
      *
      * @returns {Subscription}
      */
-    loadAll() {
+    loadAll(): Subscription {
         return this.service.getDailyRates().subscribe(
             (res: CacheRates) => {
                 this.exchangeRates = res;
                 this.initState();
             },
-                (res: any) => this.onAlert(res)
+                (res: HttpErrorResponse) => this._onAlert(res.message)
         );
     }
 
@@ -191,7 +193,7 @@ export class MainComponent implements OnInit {
      *
      * @param message {String} Message
      */
-    private onAlert(message: string): void {
+    private _onAlert(message: string): void {
         this.alertService.add({message});
     }
 }
